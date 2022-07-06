@@ -2,22 +2,13 @@ body {
   font-size: 1.7em;
   line-height: 1.6em;
 }
-.editor-container [contenteditable=true] {
+[contenteditable=true] {
   padding: 2em;
-  position: relative;
-}
-
-.drag-handle {
-  width: 30px;
-  height: 30px; 
-  cursor: move;
-  background: grey;
-  border: 1px solid #000;
   position: absolute;
-
+  min-height: 100vh;
   left: 0;
-  top: 8px;
-  border-radius: 100%;
+  top: 0;
+  width: 100%;
 }
 
 .placeholder {
@@ -25,11 +16,9 @@ body {
   left: 2em;
   top: 2em;
   opacity: .3;
-  padding-left: 50px;
 }
 
 p {
-  padding-left: 50px;
   margin: 0;
   position: relative;
   margin-bottom: 10px;
