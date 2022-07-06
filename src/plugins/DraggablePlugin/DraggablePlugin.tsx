@@ -28,6 +28,7 @@ export function DraggablePlugin() {
       INSERT_PARAGRAPH_COMMAND,
       (event) => {
         const selection = $getSelection();
+        console.log("hello");
         if (!$isRangeSelection(selection)) {
           return false;
         }
@@ -52,17 +53,15 @@ export function DraggablePlugin() {
         const selection = $getSelection();
         const node = $getNearestNodeFromDOMNode(event.target as Element);
         if (node != null) {
-          const droppable = $findMatchingParent(
+          const dropTarget = $findMatchingParent(
             node,
             (_node) => _node.getType() === "paragraph"
           );
-          if (droppable != null) {
+          if (dropTarget != null) {
             event.preventDefault();
-            const el = editor.getElementByKey(
-              droppable.getKey()
-            )
+            const el = editor.getElementByKey(dropTarget.getKey());
             if (el == null) throw new Error("waah");
-            addClassNamesToElement(el, 'drop-over')
+            addClassNamesToElement(el, "drop-over");
             return true;
           }
         }

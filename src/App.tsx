@@ -6,6 +6,9 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import TreeViewPlugin from "./plugins/TreeViewPlugin/TreeViewPlugin";
 import { ParagraphNode } from "./nodes/nodes";
 import { DraggablePlugin } from "./plugins/DraggablePlugin/DraggablePlugin";
+import { LexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import React from "react";
+import { createEditor } from "lexical";
 
 const initialState = {
   root: {
@@ -23,21 +26,26 @@ const initialState = {
   },
 };
 
-export default function App() {
+const WithLexicalComposer = (props: React.PropsWithChildren<{}>) => {
   return (
     <LexicalComposer
       initialConfig={{
         namespace: "test",
         nodes: [ParagraphNode],
         editorState: JSON.stringify(initialState),
-        theme: {
-          highlight: "boing",
-        },
         onError: (err) => {
           console.error(err);
         },
       }}
     >
+      <>{props.children}</>
+    </LexicalComposer>
+  );
+};
+
+export default function App() {
+  return (
+    <WithLexicalComposer>
       <div className="editor-container">
         <RichTextPlugin
           contentEditable={<ContentEditable />}
@@ -48,7 +56,7 @@ export default function App() {
         <DraggablePlugin />
       </div>
       <TreeViewPlugin />
-    </LexicalComposer>
+    </WithLexicalComposer>
   );
 }
 
