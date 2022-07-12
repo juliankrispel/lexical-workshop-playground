@@ -5,6 +5,11 @@ import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin'
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { createEmptyHistoryState, HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import { CustomElementNode } from "./nodes/CustomElementNode";
+import { CollapserNode } from "./nodes/CollapserNode";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { CollapserPlugin } from "./plugins/CollapserPlugin";
+import { CollapsedNode } from "./nodes/CollapsedElement";
 
 const initialState = {
   root: {
@@ -13,11 +18,8 @@ const initialState = {
         type: "paragraph",
         children: [
           {
-            text: "Hello",
+            text: "Hello ",
             type: "text",
-          },
-          {
-            type: "linebreak",
           },
           {
             text: "World",
@@ -36,22 +38,23 @@ export default function App() {
     <LexicalComposer
       initialConfig={{
         namespace: "test",
-        nodes: [],
+        nodes: [CustomElementNode, CollapserNode, CollapsedNode],
         editorState: JSON.stringify(initialState),
         onError: (err) => {
           console.error(err);
         },
       }}
     >
-      <PlainTextPlugin
-        contentEditable={<ContentEditable />}
-        placeholder={<div className="placeholder">Type something</div>}
-      />
       <HistoryPlugin externalHistoryState={history} />
       <OnChangePlugin
         onChange={(editorState) => {
           console.log(editorState.toJSON().root.children);
         }}
+      />
+      <CollapserPlugin />
+      <RichTextPlugin
+        contentEditable={<ContentEditable />}
+        placeholder={<div className="placeholder">Type something</div>}
       />
     </LexicalComposer>
   );

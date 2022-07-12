@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 1.7em;
   line-height: 1.6em;
@@ -16,6 +20,7 @@ body {
   left: 2em;
   top: 2em;
   opacity: .3;
+  z-index: -1;
 }
 
 p {
@@ -27,4 +32,10 @@ p {
 .drop-over {
   background: #f0f0f0;
 
+}
+
+.toggle {
+  user-select: none;
+  cursor: pointer;
+  z-index: 999;
 }
