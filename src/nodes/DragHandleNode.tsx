@@ -11,6 +11,8 @@ const Handle = () => {
     if (p != null) {
       p.draggable = true;
     }
+  }} onClick={(e) => {
+    e.preventDefault()
   }}>⊚</span>;
 }
 
@@ -29,6 +31,10 @@ export class DragHandleNode extends DecoratorBlockNode {
 
   static importJSON() {
     return new DragHandleNode();
+  }
+
+  isTopLevel(): boolean {
+    return true;
   }
 
   exportJSON() {
