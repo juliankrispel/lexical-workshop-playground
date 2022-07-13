@@ -1,8 +1,6 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { DecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
-import { $isElementNode, DecoratorNode, EditorConfig, LexicalEditor, NodeKey } from "lexical";
-import { useRef } from "react";
-import { CollapsedNode } from "./CollapsedElement";
+import { EditorConfig, LexicalEditor, NodeKey } from "lexical";
 
 const Handle = () => {
   const [editor] = useLexicalComposerContext()

@@ -21,6 +21,7 @@ export class CustomElementNode extends ElementNode {
   }
 
   exportJSON(): SerializedElementNode {
+    const children = this.getChildren()
     return {
       ...super.exportJSON(),
       type: this.getType(),

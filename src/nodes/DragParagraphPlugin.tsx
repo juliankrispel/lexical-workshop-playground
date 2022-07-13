@@ -41,16 +41,6 @@ export function DragAndDropPlugin() {
           case "created":
             const el = editor.getElementByKey(key)
             el?.setAttribute("draggable", "true");
-            if ($isElementNode(node)) {
-              const children = node.getChildren()
-              if (children.length === 0) {
-                node.append($createTextNode(""));
-              }
-              const firstChild = node.getFirstChild()
-              if (!children.some(child => child.getType() === 'dragHandle') && firstChild != null) {
-                firstChild.insertBefore(new DragHandleNode());
-              }
-            }
             break;
           default:
             break;
