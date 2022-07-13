@@ -7,7 +7,6 @@ export function CollapserPlugin() {
   const [editor] = useLexicalComposerContext();
 
   editor.registerMutationListener(ParagraphNode, (mutations) => {
-    console.log({ mutations });
     editor.update(() => {
       for (const [key, type] of mutations) {
         const node = $getNodeByKey(key);

@@ -12,6 +12,8 @@ import { CollapserPlugin } from "./plugins/CollapserPlugin";
 import { CollapsedNode } from "./nodes/CollapsedElement";
 import { ClearEditorPlugin } from "@lexical/react/LexicalClearEditorPlugin";
 import { ResetPlugin } from "./plugins/ToolbarPlugin";
+import { DragAndDropPlugin } from "./plugins/DragAndDropPlugin";
+import { DragHandleNode } from "./nodes/DragHandleNode";
 
 const initialState = {
   root: {
@@ -40,7 +42,12 @@ export default function App() {
     <LexicalComposer
       initialConfig={{
         namespace: "test",
-        nodes: [CustomElementNode, CollapserNode, CollapsedNode],
+        nodes: [
+          CustomElementNode,
+          CollapserNode,
+          CollapsedNode,
+          DragHandleNode,
+        ],
         editorState: JSON.stringify(initialState),
         onError: (err) => {
           console.error(err);
@@ -53,6 +60,7 @@ export default function App() {
           console.log(editorState.toJSON().root.children);
         }}
       />
+      <DragAndDropPlugin />
       <CollapserPlugin />
       <RichTextPlugin
         contentEditable={<ContentEditable />}

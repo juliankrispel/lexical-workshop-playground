@@ -6,6 +6,7 @@ body {
   font-size: 1.7em;
   line-height: 1.6em;
 }
+
 [contenteditable=true] {
   padding: 2em;
   margin-top: 2em;
@@ -28,6 +29,15 @@ p {
   margin: 0;
   position: relative;
   margin-bottom: 10px;
+  padding-left: 2em;
+}
+
+.handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: grab;
+  user-select: none;
 }
 
 .drop-over {

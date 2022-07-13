@@ -1,47 +1,42 @@
+import { DecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
 import { $isElementNode, DecoratorNode, EditorConfig, LexicalEditor, NodeKey } from "lexical";
 import { CollapsedNode } from "./CollapsedElement";
 
 const Handle = () => {
-  return <span className="handle">⊚</span>;
+  return <span className="handle" onMouseDown={(e) => {
+    const el = e.target as HTMLElement;
+    const p = el.closest("p")
+    // e.preventDefault();
+    e.stopPropagation();
+    if (p != null) {
+      p.draggable = true;
+    }
+  }}>⊚</span>;
 }
 
-export class DragHandleNode extends DecoratorNode<JSX.Element> {
+export class DragHandleNode extends DecoratorBlockNode {
   static getType(): string {
     return "dragHandle";
   }
 
-  constructor(content: null | string = null, key?: NodeKey) {
-    super(key);
-    this.__content = content;
+  constructor(key?: NodeKey) {
+    super(key as any);
   }
 
   static clone(node: DragHandleNode) {
-    return new DragHandleNode(node.__content, node.__key);
+    return new DragHandleNode(node.__key);
   }
 
-  importJSON() {
-    return new DragHandleNode(this.__content, this.__key);
-  }
-
-  updateDOM(
-    _prevNode: unknown,
-    _dom: HTMLElement,
-    _config: EditorConfig
-  ): boolean {
-    return false;
+  static importJSON() {
+    return new DragHandleNode();
   }
 
   exportJSON() {
     return {
+      ...super.exportJSON(),
       type: this.getType(),
-      content: this.__content,
       version: 1,
     };
-  }
-
-  createDOM(_config: EditorConfig, _editor: LexicalEditor): HTMLElement {
-    const el = document.createElement("span");
-    return el;
   }
 
   decorate(editor: LexicalEditor, config: EditorConfig): JSX.Element {
