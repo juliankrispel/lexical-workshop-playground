@@ -10,6 +10,8 @@ import { CollapserNode } from "./nodes/CollapserNode";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { CollapserPlugin } from "./plugins/CollapserPlugin";
 import { CollapsedNode } from "./nodes/CollapsedElement";
+import { ClearEditorPlugin } from "@lexical/react/LexicalClearEditorPlugin";
+import { ResetPlugin } from "./plugins/ToolbarPlugin";
 
 const initialState = {
   root: {
@@ -56,6 +58,8 @@ export default function App() {
         contentEditable={<ContentEditable />}
         placeholder={<div className="placeholder">Type something</div>}
       />
+      <ClearEditorPlugin />
+      <ResetPlugin />
     </LexicalComposer>
   );
 }
