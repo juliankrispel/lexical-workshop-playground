@@ -1,5 +1,5 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $createTextNode, $getNodeByKey, $isElementNode, COMMAND_PRIORITY_EDITOR, DRAGEND_COMMAND, DRAGOVER_COMMAND, DRAGSTART_COMMAND, ParagraphNode, TextNode } from "lexical";
+import { $createTextNode, $getNodeByKey, $isElementNode, CLICK_COMMAND, COMMAND_PRIORITY_EDITOR, DRAGEND_COMMAND, DRAGOVER_COMMAND, DRAGSTART_COMMAND, ParagraphNode, SELECTION_CHANGE_COMMAND, TextNode } from "lexical";
 import { DragHandleNode } from "../nodes/DragHandleNode";
 
 export function DragAndDropPlugin() {
@@ -10,6 +10,23 @@ export function DragAndDropPlugin() {
     (payload, editor) => {
       console.log('dragstart', payload);
       return false;
+    },
+    COMMAND_PRIORITY_EDITOR
+  );
+
+  editor.registerCommand(
+    SELECTION_CHANGE_COMMAND,
+    (payload, editor) => {
+      console.log("selection change");
+    },
+    COMMAND_PRIORITY_EDITOR
+  );
+
+
+  editor.registerCommand(
+    CLICK_COMMAND,
+    (payload, editor) => {
+      console.log("click");
     },
     COMMAND_PRIORITY_EDITOR
   );

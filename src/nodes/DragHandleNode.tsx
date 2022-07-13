@@ -1,19 +1,32 @@
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { DecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
 import { $isElementNode, DecoratorNode, EditorConfig, LexicalEditor, NodeKey } from "lexical";
+import { useRef } from "react";
 import { CollapsedNode } from "./CollapsedElement";
 
 const Handle = () => {
-  return <span className="handle" onMouseDown={(e) => {
-    const el = e.target as HTMLElement;
-    const p = el.closest("p")
-    // e.preventDefault();
-    e.stopPropagation();
-    if (p != null) {
-      p.draggable = true;
-    }
-  }} onClick={(e) => {
-    e.preventDefault()
-  }}>⊚</span>;
+  const [editor] = useLexicalComposerContext()
+  return (
+    <span
+      className="handle"
+      onMouseDown={(e) => {
+        editor.blur();
+        const el = e.target as HTMLElement;
+        const p = el.closest("p");
+        // e.preventDefault();
+        e.stopPropagation();
+        console.log(p);
+        if (p != null) {
+          p.setAttribute("draggable", "true");
+        }
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
+      ⊚
+    </span>
+  );
 }
 
 export class DragHandleNode extends DecoratorBlockNode {
